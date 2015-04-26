@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+    {{ form.media }}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.errors }}
+        {% if was_saved %}
+            <ul class="messagelist">
+                <li class="success">{{ show_message }}</li>
+            </ul>
+        {% endif %}
+        <fieldset class="dcol">
+            <table class='item'>
+                {% for field in form %}
+                    <tr>
+                        <th><label>{{ field.label }}</label></th>
+                        <td>{{ field }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </fieldset>
+        <input type="submit" name="register" value="Записаться на прием"/>
+        <input type="submit" name="new_register" value="Новая запись"/>
+    </form>
+{% endblock %}
